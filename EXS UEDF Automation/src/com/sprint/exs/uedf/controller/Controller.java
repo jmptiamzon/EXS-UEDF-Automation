@@ -117,14 +117,23 @@ public class Controller {
 				cell = row.createCell(20);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getEdfSerial());
 				
-				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p3")) {
+				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p3") || uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("k3")) {
 					cell = row.createCell(25);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec());
 				}
 				
-				cell = row.createCell(26);
-				cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
+				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("k3")) {
+					cell = row.createCell(52);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec());
+				}
 				
+				else {
+				
+					cell = row.createCell(26);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
+				}
+				
+				//52
 			}
 			
 			xlsxFile.close();

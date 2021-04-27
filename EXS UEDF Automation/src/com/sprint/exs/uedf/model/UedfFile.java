@@ -8,6 +8,7 @@ public class UedfFile {
 	private String equipmentType;
 	private String lockCode1;
 	private String lockCode2;
+	private String csnOrEid;
 	private String softwareVersionNo;
 	private String meidHex;
 	private String meidDec;
@@ -26,6 +27,7 @@ public class UedfFile {
 		equipmentType = "";
 		lockCode1 = "";
 		lockCode2 = "";
+		csnOrEid = "";
 		softwareVersionNo = "";
 		meidHex = "";
 		meidDec = "";
@@ -92,6 +94,14 @@ public class UedfFile {
 
 	public void setLockCode2(String lockCode2) {
 		this.lockCode2 = lockCode2;
+	}
+	
+	public String getCsnOrEid() {
+		return csnOrEid;
+	}
+
+	public void setCsnOrEid(String csnOrEid) {
+		this.csnOrEid = csnOrEid;
 	}
 
 	public String getSoftwareVersionNo() {

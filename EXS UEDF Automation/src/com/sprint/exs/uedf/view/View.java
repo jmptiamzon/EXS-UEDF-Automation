@@ -72,33 +72,33 @@ public class View extends JFrame implements ActionListener {
 		
 		generateUedf = new JButton("Generate UEDF");
 		generateUedf.addActionListener(this);
-		errorModel = new DefaultTableModel(0, 0)
-		{
+		errorModel = new DefaultTableModel(0, 0);
+		//{
 			/**
 			 * 
 			 */
-			private static final long serialVersionUID = 1L;
+		//	private static final long serialVersionUID = 1L;
 
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
+		//	public boolean isCellEditable(int row, int column) {
+		//		return false;
+		//	}
+		//};
 		errorModel.setColumnIdentifiers(ERROR_COLUMN);
 		errorTable = new JTable(errorModel);
 		scrollPaneErr = new JScrollPane(errorTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		errorTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
-		uedfModel = new DefaultTableModel(0, 0)
-		{
+		uedfModel = new DefaultTableModel(0, 0);
+		//{
 			/**
 			 * 
 			 */
-			private static final long serialVersionUID = 1L;
+		//	private static final long serialVersionUID = 1L;
 
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
+		//	public boolean isCellEditable(int row, int column) {
+		//		return false;
+		//	}
+		//};
 		uedfModel.setColumnIdentifiers(UEDF_COLUMN);
 		uedfLogsTable = new JTable(uedfModel);
 		scrollPaneUedf = new JScrollPane(uedfLogsTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

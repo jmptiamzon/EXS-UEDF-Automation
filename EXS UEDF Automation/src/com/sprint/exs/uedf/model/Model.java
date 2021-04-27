@@ -87,15 +87,28 @@ public class Model {
 				tempUedfFile.setSoftwareVersionNo(rs.getString(8));
 				tempUedfFile.setLockCode1(rs.getString(9));
 				tempUedfFile.setLockCode2(rs.getString(10));
-				tempUedfFile.setMeidHex(rs.getString(11));
-				tempUedfFile.setMeidDec(rs.getString(12));
-				if (filename.split("-")[1].equalsIgnoreCase("p3")) {
-					tempUedfFile.setImeiDec(rs.getString(13));
-					tempUedfFile.setIccid(rs.getString(14));
-					tempUedfFile.setComment(rs.getString(15));
-				} else {
-					tempUedfFile.setIccid(rs.getString(13));
-					tempUedfFile.setComment(rs.getString(14));
+				
+				if (filename.split("-")[1].equalsIgnoreCase("k3")) {
+					tempUedfFile.setCsnOrEid(rs.getString(11));
+					tempUedfFile.setImeiDec(rs.getString(12));
+					tempUedfFile.setComment(rs.getString(13));
+				}
+				
+				else {
+					tempUedfFile.setMeidHex(rs.getString(11));
+					tempUedfFile.setMeidDec(rs.getString(12));
+					
+					if (filename.split("-")[1].equalsIgnoreCase("p3")) {
+						tempUedfFile.setImeiDec(rs.getString(13));
+						tempUedfFile.setIccid(rs.getString(14));
+						tempUedfFile.setErrorDescription(rs.getString(15));
+						tempUedfFile.setComment(rs.getString(16));
+						
+					} else {
+						tempUedfFile.setIccid(rs.getString(13));
+						tempUedfFile.setErrorDescription(rs.getString(14));
+						tempUedfFile.setComment(rs.getString(15));
+					}
 				}
 
 				uedfFile.add(tempUedfFile);
