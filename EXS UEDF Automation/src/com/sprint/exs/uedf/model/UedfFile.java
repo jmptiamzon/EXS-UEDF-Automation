@@ -18,6 +18,21 @@ public class UedfFile {
 	private String errorDescription;
 	private String comment;
 	private String fileName;
+	private String macID;
+	private String sharedSecretCode;
+	private String imsi;
+	private String authKey;
+	private String authKeyChecksum;
+	private String prl;
+	private String puc1;
+	private String puc2;
+	private String pin1;
+	private String pin2;
+	private String adminCode1;
+	private String ki;
+	private String imsiUiccCard;
+	private String accUiccCard;
+	private String sfEquipmentID;
 	
 	public UedfFile() {
 		mfgLocationID = "";
@@ -37,7 +52,21 @@ public class UedfFile {
 		fileName = "";
 		errorDescription = "";
 		comment = "";
-		
+		macID = "";
+		sharedSecretCode = "";
+		imsi = "";
+		authKey = "";
+		authKeyChecksum = "";
+		prl = "";
+		puc1 = "";
+		puc2 = "";
+		pin1 = "";
+		pin2 = "";
+		adminCode1 = "";
+		ki = "";
+		imsiUiccCard = "";
+		accUiccCard = "";
+		sfEquipmentID = "";
 	}
 
 	public String getMfgLocationID() {
@@ -176,4 +205,124 @@ public class UedfFile {
 		this.fileName = fileName;
 	}
 
+	public String getMacID() {
+		return macID;
+	}
+
+	public void setMacID(String macID) {
+		this.macID = macID;
+	}
+
+	public String getSharedSecretCode() {
+		return sharedSecretCode;
+	}
+
+	public void setSharedSecretCode(String sharedSecretCode) {
+		this.sharedSecretCode = sharedSecretCode;
+	}
+
+	public String getImsi() {
+		return imsi;
+	}
+
+	public void setImsi(String imsi) {
+		this.imsi = imsi;
+	}
+
+	public String getAuthKey() {
+		return authKey;
+	}
+
+	public void setAuthKey(String authKey) {
+		this.authKey = authKey;
+	}
+
+	public String getAuthKeyChecksum() {
+		return authKeyChecksum;
+	}
+
+	public void setAuthKeyChecksum(String authKeyChecksum) {
+		this.authKeyChecksum = authKeyChecksum;
+	}
+
+	public String getPrl() {
+		return prl;
+	}
+
+	public void setPrl(String prl) {
+		this.prl = prl;
+	}
+
+	public String getPuc1() {
+		return puc1;
+	}
+
+	public void setPuc1(String puc1) {
+		this.puc1 = puc1;
+	}
+
+	public String getPuc2() {
+		return puc2;
+	}
+
+	public void setPuc2(String puc2) {
+		this.puc2 = puc2;
+	}
+
+	public String getPin1() {
+		return pin1;
+	}
+
+	public void setPin1(String pin1) {
+		this.pin1 = pin1;
+	}
+
+	public String getPin2() {
+		return pin2;
+	}
+
+	public void setPin2(String pin2) {
+		this.pin2 = pin2;
+	}
+
+	public String getAdminCode1() {
+		return adminCode1;
+	}
+
+	public void setAdminCode1(String adminCode1) {
+		this.adminCode1 = adminCode1;
+	}
+
+	public String getKi() {
+		return ki;
+	}
+
+	public void setKi(String ki) {
+		this.ki = ki;
+	}
+
+	public String getImsiUiccCard() {
+		return imsiUiccCard;
+	}
+
+	public void setImsiUiccCard(String imsiUiccCard) {
+		this.imsiUiccCard = imsiUiccCard;
+	}
+
+	public String getAccUiccCard() {
+		return accUiccCard;
+	}
+
+	public void setAccUiccCard(String accUiccCard) {
+		this.accUiccCard = accUiccCard;
+	}
+
+	public String getSfEquipmentID() {
+		return sfEquipmentID;
+	}
+
+	public void setSfEquipmentID(String sfEquipmentID) {
+		this.sfEquipmentID = sfEquipmentID;
+	}
+	
 }

@@ -68,48 +68,98 @@ public class Model {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");		
 			Connection conn = 
-					DriverManager.getConnection("", "", "");
+					DriverManager.getConnection("","","");
 			
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, filename.split("-")[0]);
+			System.out.println(filename.split("-")[0]);
 			
 			ResultSet rs = statement.executeQuery();
 			
 			while (rs.next()) {
 				tempUedfFile = new UedfFile();
-				tempUedfFile.setFileName(rs.getString(1));
-				tempUedfFile.setEdfSerial(rs.getString(2));
-				tempUedfFile.setMfgLocationID(rs.getString(3));
-				tempUedfFile.setMfgName(rs.getString(4));
-				tempUedfFile.setModelNumber(rs.getString(5));
-				tempUedfFile.setModelName(rs.getString(6));
-				tempUedfFile.setEquipmentType(rs.getString(7));
-				tempUedfFile.setSoftwareVersionNo(rs.getString(8));
-				tempUedfFile.setLockCode1(rs.getString(9));
-				tempUedfFile.setLockCode2(rs.getString(10));
+				tempUedfFile.setFileName(rs.getString(1) == null ? "(null)" : rs.getString(1));
+				tempUedfFile.setEdfSerial(rs.getString(2) == null ? "(null)" : rs.getString(2));
+				tempUedfFile.setMfgLocationID(rs.getString(3) == null ? "(null)" : rs.getString(3));
+				tempUedfFile.setMfgName(rs.getString(4) == null ? "(null)" : rs.getString(4));
+				tempUedfFile.setModelNumber(rs.getString(5) == null ? "(null)" : rs.getString(5));
+				tempUedfFile.setModelName(rs.getString(6) == null ? "(null)" : rs.getString(6));
+				tempUedfFile.setEquipmentType(rs.getString(7) == null ? "(null)" : rs.getString(7));
+				/* if P P3 P5 K3 A B
+				tempUedfFile.setSoftwareVersionNo(rs.getString(8) == null ? "(null)" : rs.getString(8)); */
+				
+				/* P, P3, P5, K3
+				if (!filename.split("-")[1].equalsIgnoreCase("a")) {
+					tempUedfFile.setLockCode1(rs.getString(9) == null ? "(null)" : rs.getString(9));
+					tempUedfFile.setLockCode2(rs.getString(10) == null ? "(null)" : rs.getString(10));
+				} */
+				
+				if (filename.split("-")[1].equalsIgnoreCase("a")) {
+					tempUedfFile.setMacID(rs.getString(9) == null ? "(null)" : rs.getString(9));
+					tempUedfFile.setSharedSecretCode(rs.getString(10) == null ? "(null)" : rs.getString(10));
+					tempUedfFile.setErrorDescription(rs.getString(11) == null ? "(null)" : rs.getString(11));
+					tempUedfFile.setComment(rs.getString(12) == null ? "(null)" : rs.getString(12));
+					
+				}
+				
+				if (filename.split("-")[1].equalsIgnoreCase("b")) {
+					tempUedfFile.setImsi(rs.getString(9) == null ? "(null)" : rs.getString(9));
+					tempUedfFile.setAuthKey(rs.getString(10) == null ? "(null)" : rs.getString(10));
+					tempUedfFile.setAuthKeyChecksum(rs.getString(11) == null ? "(null)" : rs.getString(11));
+					tempUedfFile.setLockCode1(rs.getString(12) == null ? "(null)" : rs.getString(12));
+					tempUedfFile.setLockCode2(rs.getString(13) == null ? "(null)" : rs.getString(13));
+					tempUedfFile.setMeidHex(rs.getString(14) == null ? "(null)" : rs.getString(14));
+					tempUedfFile.setMeidDec(rs.getString(15) == null ? "(null)" : rs.getString(15));
+					tempUedfFile.setPrl(rs.getString(16) == null ? "(null)" : rs.getString(16));
+					tempUedfFile.setErrorDescription(rs.getString(17) == null ? "(null)" : rs.getString(17));
+					tempUedfFile.setComment(rs.getString(18) == null ? "(null)" : rs.getString(18));
+				}
+				
+				if (filename.split("-")[1].contains("c")) {
+					if(filename.split("-")[1].equalsIgnoreCase("c")) {
+						tempUedfFile.setImsi(rs.getString(8) == null ? "(null)" : rs.getString(8));
+					}
+					
+					tempUedfFile.setAuthKey(rs.getString(9) == null ? "(null)" : rs.getString(9));
+					tempUedfFile.setAuthKeyChecksum(rs.getString(10) == null ? "(null)" : rs.getString(10));
+					tempUedfFile.setPrl(rs.getString(11) == null ? "(null)" : rs.getString(11));
+					tempUedfFile.setIccid(rs.getString(12) == null ? "(null)" : rs.getString(12));
+					tempUedfFile.setPuc1(rs.getString(13) == null ? "(null)" : rs.getString(13));
+					tempUedfFile.setPuc2(rs.getString(14) == null ? "(null)" : rs.getString(14));
+					tempUedfFile.setPin1(rs.getString(15) == null ? "(null)" : rs.getString(15));
+					tempUedfFile.setPin2(rs.getString(16) == null ? "(null)" : rs.getString(16));
+					tempUedfFile.setAdminCode1(rs.getString(17) == null ? "(null)" : rs.getString(17));
+					tempUedfFile.setKi(rs.getString(18) == null ? "(null)" : rs.getString(18));
+					tempUedfFile.setImsiUiccCard(rs.getString(19) == null ? "(null)" : rs.getString(19));
+					tempUedfFile.setAccUiccCard(rs.getString(20) == null ? "(null)" : rs.getString(20));
+					tempUedfFile.setSfEquipmentID(rs.getString(21) == null ? "(null)" : rs.getString(21));
+					tempUedfFile.setErrorDescription(rs.getString(22) == null ? "(null)" : rs.getString(22));
+					tempUedfFile.setComment(rs.getString(23) == null ? "(null)" : rs.getString(23));
+				}
 				
 				if (filename.split("-")[1].equalsIgnoreCase("k3")) {
-					tempUedfFile.setCsnOrEid(rs.getString(11));
-					tempUedfFile.setImeiDec(rs.getString(12));
-					tempUedfFile.setComment(rs.getString(13));
+					tempUedfFile.setCsnOrEid(rs.getString(11) == null ? "(null)" : rs.getString(11));
+					tempUedfFile.setImeiDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
+					tempUedfFile.setComment(rs.getString(13) == null ? "(null)" : rs.getString(13));
 				}
 				
-				else {
-					tempUedfFile.setMeidHex(rs.getString(11));
-					tempUedfFile.setMeidDec(rs.getString(12));
+				/*
+				else { // P3, P5, P
+					tempUedfFile.setMeidHex(rs.getString(11) == null ? "(null)" : rs.getString(11));
+					tempUedfFile.setMeidDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					
 					if (filename.split("-")[1].equalsIgnoreCase("p3")) {
-						tempUedfFile.setImeiDec(rs.getString(13));
-						tempUedfFile.setIccid(rs.getString(14));
-						tempUedfFile.setErrorDescription(rs.getString(15));
-						tempUedfFile.setComment(rs.getString(16));
+						tempUedfFile.setImeiDec(rs.getString(13) == null ? "(null)" : rs.getString(13));
+						tempUedfFile.setIccid(rs.getString(14) == null ? "(null)" : rs.getString(14));
+						tempUedfFile.setErrorDescription(rs.getString(15) == null ? "(null)" : rs.getString(15));
+						tempUedfFile.setComment(rs.getString(16) == null ? "(null)" : rs.getString(16));
 						
 					} else {
-						tempUedfFile.setIccid(rs.getString(13));
-						tempUedfFile.setErrorDescription(rs.getString(14));
-						tempUedfFile.setComment(rs.getString(15));
+						tempUedfFile.setIccid(rs.getString(13) == null ? "(null)" : rs.getString(13));
+						tempUedfFile.setErrorDescription(rs.getString(14) == null ? "(null)" : rs.getString(14));
+						tempUedfFile.setComment(rs.getString(15) == null ? "(null)" : rs.getString(15));
 					}
-				}
+				}*/
 
 				uedfFile.add(tempUedfFile);
 			}

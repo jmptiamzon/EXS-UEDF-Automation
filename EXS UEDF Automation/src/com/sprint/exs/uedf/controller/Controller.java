@@ -37,8 +37,16 @@ public class Controller {
 		Map<String, List<UedfFile>> uedfFileRecord = new HashMap<>();
 		
 		for (String key : uedfErrors.keySet()) {
+			if (key.split("-")[1].equalsIgnoreCase("a")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_A()));
 				
-			if (key.split("-")[1].equalsIgnoreCase("p")) {
+			} else if (key.split("-")[1].equalsIgnoreCase("b")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_B()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("c")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_C()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("p")) {
 				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_P()));
 				
 			} else if (key.split("-")[1].equalsIgnoreCase("p5")) {
@@ -63,7 +71,9 @@ public class Controller {
 	public void createMultipleExcel(Map<String, List<UedfFile>> uedfFileRecord) {
 		
 		for (String key : uedfFileRecord.keySet()) {
-			createExcel(uedfFileRecord.get(key));
+			System.out.println(key);
+			System.out.println(uedfFileRecord.get(key).size());
+			//createExcel(uedfFileRecord.get(key));
 		}
 		
 	}
@@ -71,6 +81,7 @@ public class Controller {
 	public void createExcel(List<UedfFile> uedfFileRecordList) {
 		String filepath = System.getProperty("user.home") + "\\Documents\\exs_uedf\\UEDF_Template.xlsx";
 		String outputFile = System.getProperty("user.home") + "\\Documents\\exs_uedf\\spbsist_" + uedfFileRecordList.get(0).getFileName().split("\\.")[0] + ".xlsx";
+		String serialType = "";
 		
 		try {
 			FileInputStream xlsxFile = new FileInputStream(new File(filepath));
@@ -81,6 +92,7 @@ public class Controller {
 			
 			for (int ctr = 0; ctr < uedfFileRecordList.size(); ctr++) {
 				Row row = sheet.createRow(ctr + 1);
+				serialType = uedfFileRecordList.get(ctr).getEdfSerial();
 				
 				Cell cell = row.createCell(2); //20
 				cell.setCellValue(uedfFileRecordList.get(ctr).getMfgLocationID());
@@ -97,41 +109,102 @@ public class Controller {
 				cell = row.createCell(6);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getEquipmentType());
 				
-				cell = row.createCell(11);
-				cell.setCellValue(uedfFileRecordList.get(ctr).getLockCode1());
+				// P P3 P5 K3 B
+				if (!serialType.equalsIgnoreCase("a")) {
+					cell = row.createCell(11);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getLockCode1());
 				
-				cell = row.createCell(12);
-				cell.setCellValue(uedfFileRecordList.get(ctr).getLockCode2());
+					cell = row.createCell(12);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getLockCode2());
+				}
 				
+				if (serialType.equalsIgnoreCase("a")) {
+					cell = row.createCell(14);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getSharedSecretCode());
+					
+					cell = row.createCell(18);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getMacID());
+				}
+				
+				if (serialType.equalsIgnoreCase("b") || serialType.equalsIgnoreCase("c")) {
+					cell = row.createCell(8);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getImsi());
+					
+					cell = row.createCell(9);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getAuthKey());
+					
+					cell = row.createCell(10);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getAuthKeyChecksum());
+
+					cell = row.createCell(17);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getPrl());
+				}
+				
+				if (serialType.equalsIgnoreCase("c")) {
+					cell = row.createCell(26);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
+					
+					cell = row.createCell(27);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getPuc1());
+
+					cell = row.createCell(28);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getPuc2());
+
+					cell = row.createCell(29);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getPin1());
+
+					cell = row.createCell(30);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getPin2());
+					
+					cell = row.createCell(31);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getAdminCode1());
+					
+					cell = row.createCell(35);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getKi());
+					
+					cell = row.createCell(46);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getImsiUiccCard());
+					
+					cell = row.createCell(47);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getAccUiccCard());
+					
+					cell = row.createCell(48);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getSfEquipmentID());
+				}
+				
+				/* P P3 P5 K3 A B 
 				cell = row.createCell(14);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getSoftwareVersionNo());
+				*/
 				
+				/* P B
 				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p")) {
 					cell = row.createCell(15);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMeidHex());
 					
 					cell = row.createCell(16);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMeidDec());
-				}
+				}*/
 				
 				cell = row.createCell(20);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getEdfSerial());
 				
-				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p3") || uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("k3")) {
+				if (serialType.equalsIgnoreCase("p3") || serialType.equalsIgnoreCase("k3")) {
 					cell = row.createCell(25);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec());
 				}
 				
-				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("k3")) {
+				if (serialType.equalsIgnoreCase("k3")) {
 					cell = row.createCell(52);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec());
 				}
 				
-				else {
+				/* P3, P5, P
+				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p") || uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p3")) {
 				
 					cell = row.createCell(26);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
-				}
+				}*/
 				
 				//52
 			}
