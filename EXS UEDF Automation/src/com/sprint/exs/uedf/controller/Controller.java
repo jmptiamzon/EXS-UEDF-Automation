@@ -126,9 +126,11 @@ public class Controller {
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMacID());
 				}
 				
-				if (serialType.equalsIgnoreCase("b") || serialType.equalsIgnoreCase("c")) {
-					cell = row.createCell(8);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getImsi());
+				if (serialType.equalsIgnoreCase("b") || serialType.toLowerCase().contains("c")) {
+					if (serialType.equalsIgnoreCase("c")) {
+						cell = row.createCell(8);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getImsi());
+					}
 					
 					cell = row.createCell(9);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getAuthKey());
@@ -140,36 +142,49 @@ public class Controller {
 					cell.setCellValue(uedfFileRecordList.get(ctr).getPrl());
 				}
 				
-				if (serialType.equalsIgnoreCase("c")) {
-					cell = row.createCell(26);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
+				if (serialType.toLowerCase().contains("c")) {
 					
-					cell = row.createCell(27);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getPuc1());
-
-					cell = row.createCell(28);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getPuc2());
-
-					cell = row.createCell(29);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getPin1());
-
-					cell = row.createCell(30);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getPin2());
+					if (serialType.equalsIgnoreCase("c") || serialType.equalsIgnoreCase("c1")) {
+						cell = row.createCell(26);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
+						
+						cell = row.createCell(27);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getPuc1());
+	
+						cell = row.createCell(28);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getPuc2());
+	
+						cell = row.createCell(29);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getPin1());
+	
+						cell = row.createCell(30);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getPin2());
+						
+						cell = row.createCell(31);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getAdminCode1());
+						
+						cell = row.createCell(35);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getKi());
+						
+						cell = row.createCell(46);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getImsiUiccCard());
+						
+						cell = row.createCell(47);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getAccUiccCard());
+						
+						cell = row.createCell(48);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getSfEquipmentID());
+						
+					} else {
+						cell = row.createCell(50);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getEfImpu());
+						
+						cell = row.createCell(51);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getEfImpi());
+						
+					}
 					
-					cell = row.createCell(31);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getAdminCode1());
 					
-					cell = row.createCell(35);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getKi());
-					
-					cell = row.createCell(46);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getImsiUiccCard());
-					
-					cell = row.createCell(47);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getAccUiccCard());
-					
-					cell = row.createCell(48);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getSfEquipmentID());
 				}
 				
 				/* P P3 P5 K3 A B 

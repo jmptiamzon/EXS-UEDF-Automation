@@ -68,7 +68,7 @@ public class Model {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");		
 			Connection conn = 
-					DriverManager.getConnection("","","");
+					DriverManager.getConnection("", "", "");
 			
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, filename.split("-")[0]);
@@ -116,10 +116,7 @@ public class Model {
 				}
 				
 				if (filename.split("-")[1].contains("c")) {
-					if(filename.split("-")[1].equalsIgnoreCase("c")) {
-						tempUedfFile.setImsi(rs.getString(8) == null ? "(null)" : rs.getString(8));
-					}
-					
+					tempUedfFile.setImsi(rs.getString(8) == null ? "(null)" : rs.getString(8));
 					tempUedfFile.setAuthKey(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setAuthKeyChecksum(rs.getString(10) == null ? "(null)" : rs.getString(10));
 					tempUedfFile.setPrl(rs.getString(11) == null ? "(null)" : rs.getString(11));
@@ -133,8 +130,16 @@ public class Model {
 					tempUedfFile.setImsiUiccCard(rs.getString(19) == null ? "(null)" : rs.getString(19));
 					tempUedfFile.setAccUiccCard(rs.getString(20) == null ? "(null)" : rs.getString(20));
 					tempUedfFile.setSfEquipmentID(rs.getString(21) == null ? "(null)" : rs.getString(21));
-					tempUedfFile.setErrorDescription(rs.getString(22) == null ? "(null)" : rs.getString(22));
-					tempUedfFile.setComment(rs.getString(23) == null ? "(null)" : rs.getString(23));
+					
+					if (filename.split("-")[1].equalsIgnoreCase("c")) {
+						tempUedfFile.setErrorDescription(rs.getString(22) == null ? "(null)" : rs.getString(22));
+						tempUedfFile.setComment(rs.getString(23) == null ? "(null)" : rs.getString(23));
+					} else {
+						tempUedfFile.setEfImpu(rs.getString(22) == null ? "(null)" : rs.getString(22));
+						tempUedfFile.setEfImpi(rs.getString(23) == null ? "(null)" : rs.getString(23));
+						tempUedfFile.setErrorDescription(rs.getString(24) == null ? "(null)" : rs.getString(24));
+						tempUedfFile.setComment(rs.getString(25) == null ? "(null)" : rs.getString(25));
+					}
 				}
 				
 				if (filename.split("-")[1].equalsIgnoreCase("k3")) {

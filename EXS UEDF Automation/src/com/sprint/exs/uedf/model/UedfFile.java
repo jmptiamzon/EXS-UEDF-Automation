@@ -33,6 +33,8 @@ public class UedfFile {
 	private String imsiUiccCard;
 	private String accUiccCard;
 	private String sfEquipmentID;
+	private String efImpu;
+	private String efImpi;
 	
 	public UedfFile() {
 		mfgLocationID = "";
@@ -67,6 +69,8 @@ public class UedfFile {
 		imsiUiccCard = "";
 		accUiccCard = "";
 		sfEquipmentID = "";
+		efImpu = "";
+		efImpi = "";
 	}
 
 	public String getMfgLocationID() {
@@ -323,6 +327,22 @@ public class UedfFile {
 
 	public void setSfEquipmentID(String sfEquipmentID) {
 		this.sfEquipmentID = sfEquipmentID;
+	}
+
+	public String getEfImpu() {
+		return efImpu;
+	}
+
+	public void setEfImpu(String efImpu) {
+		this.efImpu = efImpu;
+	}
+
+	public String getEfImpi() {
+		return efImpi;
+	}
+
+	public void setEfImpi(String efImpi) {
+		this.efImpi = efImpi;
 	}
 	
 }
