@@ -99,11 +99,11 @@ public class Queries {
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
 			", '12345' \"Software Version Number\" " + 
+			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
+			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
 			", DET.IMSI \"Imsi\" " + 
 			", DET.AKEY \"Authentication Key\" " + 
 			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
-			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
-			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.PRL \"PRL\" " + 
@@ -441,7 +441,7 @@ public class Queries {
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL ";
 	
-	private final String QUERY_E = //dito palang ako
+	private final String QUERY_E = 
 			"SELECT " + 
 			"HDR.FILE_NAME " + 
 			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
@@ -453,11 +453,11 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
-			", DET.AKEY \"Authentication Key\" " + 
-			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
+			", DET.AKEY \"Authentication Key\" " + 
+			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.PRL \"PRL\" " + 
@@ -603,9 +603,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", DET.IMEI_DECIMAL \"imeiDec\" " + 
 			", DET.ERROR_DESCRIPTION " + 
 			", CASE WHEN DET.ERROR_DESCRIPTION like '%IMEI and IMEI2 are same%' " + 
@@ -652,9 +652,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.IMEI_DECIMAL \"imeiDec\" " + 
@@ -757,9 +757,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.IMEI_DECIMAL \"imeiDec\" " + 
@@ -808,12 +808,12 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " +
+			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
+			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " +  
 			", DET.IMSI \"Imsi\" " + 
 			", DET.AKEY \"Authentication Key\" " + 
 			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
-			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
-			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.PRL \"PRL\" " + 
@@ -863,9 +863,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.ERROR_DESCRIPTION\r\n" + 
@@ -913,9 +913,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", DET.IMEI_DECIMAL \"imeiDec\" " + 
 			", DET.CSN_OR_EID \"CSN_OR_EID\" " + 
 			", DET.ERROR_DESCRIPTION " + 
@@ -951,7 +951,7 @@ public class Queries {
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL ";
 	
-	private final String QUERY_L4 =
+	private final String QUERY_L4 = 
 			"SELECT " + 
 			"HDR.FILE_NAME " + 
 			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
@@ -963,9 +963,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.IMEI_DECIMAL \"imeiDec\" " + 
@@ -1014,9 +1014,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", DET.IMEI_DECIMAL \"imeiDec\" " + 
 			", DET.ICCID \"iccId\" " + 
 			", DET.ERROR_DESCRIPTION " + 
@@ -1161,7 +1161,7 @@ public class Queries {
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL";
 	
-	private final String QUERY_P4 = //wala pa to
+	private final String QUERY_P4 = 
 			"SELECT " + 
 			"HDR.FILE_NAME " + 
 			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
@@ -1173,9 +1173,9 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.ICCID \"iccID\" " + 
@@ -1280,12 +1280,12 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
+			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
+			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
 			", DET.IMSI \"Imsi\" " + 
 			", DET.AKEY \"Authentication Key\" " + 
 			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
-			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
-			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.PRL \"PRL\" " + 
@@ -1386,12 +1386,12 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
+			", '12345' \"Software Version Number\" " + 
+			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
+			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " +
 			", DET.IMSI \"Imsi\" " + 
 			", DET.AKEY \"Authentication Key\" " + 
-			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
-			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
-			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
+			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " +  
 			", NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)) \"meidHex\" " + 
 			", NVL(DET.MEID_DECIMAL, (LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),0,8),'XXXXXXXXXX'),10,'0')|| LPAD(TO_NUMBER(SUBSTR(NVL(DET.MEID_HEX, (SELECT SUBSTR(DET.IMEI_DECIMAL,1,14) FROM DUAL)),9,6),'XXXXXXXX'),8,'0')))  \"meidHDec\" " + 
 			", DET.PRL \"PRL\" " + 
@@ -1440,7 +1440,7 @@ public class Queries {
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL ";
 	
-	private final String QUERY_U =
+	private final String QUERY_U = 
 			"SELECT " + 
 			"HDR.FILE_NAME " + 
 			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
@@ -1565,10 +1565,10 @@ public class Queries {
 			", DET.PIN1 \"PIN1\" " + 
 			", DET.PIN2 \"PIN2\" " + 
 			", DET.ADMIN1 \"Admin Code 1\" " + 
-			", DET.MANF_ENCRYPT_KEY_INDEX   \"manuEncryptKeyIndex\" " + 
 			", DET.KI \"Ki\"\r\n" + 
 			", DET.IMSI_UICC \"IMSI UICC Card\" " + 
 			", DET.ACC_UICC \"Acc UICC Card\" " + 
+			", DET.MANF_ENCRYPT_KEY_INDEX   \"manuEncryptKeyIndex\" " + 
 			", DET.ERROR_DESCRIPTION " + 
 			", CASE WHEN DET.ERROR_DESCRIPTION like '%IMEI and IMEI2 are same%' " + 
 			"THEN 'Need to Send Email with the IMEI_DEC to supply the IMEI2_DECIMAL to NMS, If NMS cannot supply send to Magenta Team' " + 
@@ -1707,7 +1707,7 @@ public class Queries {
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL ";
 	
-	private final String QUERY_W =
+	private final String QUERY_W = 
 			"SELECT " + 
 			"HDR.FILE_NAME " + 
 			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
@@ -1729,11 +1729,11 @@ public class Queries {
 			", DET.PIN1 \"PIN1\" " + 
 			", DET.PIN2 \"PIN2\" " + 
 			", DET.ADMIN1 \"Admin Code 1\" " + 
-			", DET.MANF_ENCRYPT_KEY_INDEX   \"manuEncryptKeyIndex\" " + 
 			", DET.KI \"Ki\" " + 
 			", DET.IMSI_UICC \"IMSI UICC Card\" " + 
 			", DET.ACC_UICC \"Acc UICC Card\" " + 
 			", DET.SF_EQUIPMENT_ID \"SF Equiment Id\" " + 
+			", DET.MANF_ENCRYPT_KEY_INDEX   \"manuEncryptKeyIndex\" " + 
 			", DET.ERROR_DESCRIPTION " + 
 			", CASE WHEN DET.ERROR_DESCRIPTION like '%IMEI and IMEI2 are same%' " + 
 			"THEN 'Need to Send Email with the IMEI_DEC to supply the IMEI2_DECIMAL to NMS, If NMS cannot supply send to Magenta Team' " + 
@@ -1944,7 +1944,7 @@ public class Queries {
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL ";
 	
-	private final String QUERY_Y =
+	private final String QUERY_Y = //okz
 			"SELECT " + 
 			"HDR.FILE_NAME " + 
 			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
@@ -1956,11 +1956,11 @@ public class Queries {
 			", DET.SKU \"Model Number\" " + 
 			", DET.SKU_NAME \"Model Name\" " + 
 			", DET.EQUIPMENT_TYPE \"Equipment Type (Network Type)\" " + 
-			", DET.AKEY \"Authentication Key\" " + 
-			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
+			", '12345' \"Software Version Number\" " + 
 			", NVL(DET.MSL,'000000') \"Subsidy Lock Code 1 (MSL)\" " + 
 			", NVL(DET.OTKSL,'000000')  \"Subsidy Lock Code 2 (OTKSL)\" " + 
-			", '12345' \"Software Version Number\" " + 
+			", DET.AKEY \"Authentication Key\" " + 
+			", DET.AKEY_CHECKSUM \"Authentication Key Checksum\" " + 
 			", DET.ICCID \"iccId\" " + 
 			", DET.TRANSCEIVER_SKU \"Transceiver Sku\" " + 
 			", DET.ERROR_DESCRIPTION " + 

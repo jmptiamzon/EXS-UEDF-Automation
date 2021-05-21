@@ -13,7 +13,9 @@ public class UedfFile {
 	private String meidHex;
 	private String meidDec;
 	private String edfSerial;
+	private String cardSKU;
 	private String imeiDec;
+	private String imeiDec2;
 	private String iccid;
 	private String errorDescription;
 	private String comment;
@@ -30,11 +32,15 @@ public class UedfFile {
 	private String pin2;
 	private String adminCode1;
 	private String ki;
-	private String imsiUiccCard;
+	private String imsiUiccCard;	
 	private String accUiccCard;
 	private String sfEquipmentID;
 	private String efImpu;
 	private String efImpi;
+	private String transceiverSKU;
+	private String uiccCardIndicator;
+	private String profileType;
+	private String manuEncryptKeyIndex;
 	
 	public UedfFile() {
 		mfgLocationID = "";
@@ -49,7 +55,9 @@ public class UedfFile {
 		meidHex = "";
 		meidDec = "";
 		edfSerial = "";
+		cardSKU = "";
 		imeiDec = "";
+		imeiDec2 = "";
 		iccid = "";
 		fileName = "";
 		errorDescription = "";
@@ -71,6 +79,10 @@ public class UedfFile {
 		sfEquipmentID = "";
 		efImpu = "";
 		efImpi = "";
+		transceiverSKU = "";
+		uiccCardIndicator = "";
+		profileType = "";
+		manuEncryptKeyIndex = "";
 	}
 
 	public String getMfgLocationID() {
@@ -169,12 +181,28 @@ public class UedfFile {
 		this.edfSerial = edfSerial;
 	}
 	
+	public String getCardSKU() {
+		return cardSKU;
+	}
+
+	public void setCardSKU(String cardSKU) {
+		this.cardSKU = cardSKU;
+	}
+
 	public String getImeiDec() {
 		return imeiDec;
 	}
 
 	public void setImeiDec(String imeiDec) {
 		this.imeiDec = imeiDec;
+	}
+
+	public String getImeiDec2() {
+		return imeiDec2;
+	}
+
+	public void setImeiDec2(String imeiDec2) {
+		this.imeiDec2 = imeiDec2;
 	}
 
 	public String getIccid() {
@@ -343,6 +371,38 @@ public class UedfFile {
 
 	public void setEfImpi(String efImpi) {
 		this.efImpi = efImpi;
+	}
+
+	public String getTransceiverSKU() {
+		return transceiverSKU;
+	}
+
+	public void setTransceiverSKU(String transceiverSKU) {
+		this.transceiverSKU = transceiverSKU;
+	}
+
+	public String getUiccCardIndicator() {
+		return uiccCardIndicator;
+	}
+
+	public void setUiccCardIndicator(String uiccCardIndicator) {
+		this.uiccCardIndicator = uiccCardIndicator;
+	}
+
+	public String getProfileType() {
+		return profileType;
+	}
+
+	public void setProfileType(String profileType) {
+		this.profileType = profileType;
+	}
+
+	public String getManuEncryptKeyIndex() {
+		return manuEncryptKeyIndex;
+	}
+
+	public void setManuEncryptKeyIndex(String manuEncryptKeyIndex) {
+		this.manuEncryptKeyIndex = manuEncryptKeyIndex;
 	}
 	
 }

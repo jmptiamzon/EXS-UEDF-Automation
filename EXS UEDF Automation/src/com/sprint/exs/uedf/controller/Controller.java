@@ -88,8 +88,6 @@ public class Controller {
 			Workbook workbook = new XSSFWorkbook(xlsxFile);
 			Sheet sheet = workbook.getSheetAt(0);
 			
-			
-			
 			for (int ctr = 0; ctr < uedfFileRecordList.size(); ctr++) {
 				Row row = sheet.createRow(ctr + 1);
 				serialType = uedfFileRecordList.get(ctr).getEdfSerial();
@@ -109,7 +107,7 @@ public class Controller {
 				cell = row.createCell(6);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getEquipmentType());
 				
-				// P P3 P5 K3 B
+				// P P3 P5 K3 B E H H5 K4 L L1 L3 L4 M3 R T Y
 				if (!serialType.equalsIgnoreCase("a")) {
 					cell = row.createCell(11);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getLockCode1());
@@ -118,7 +116,8 @@ public class Controller {
 					cell.setCellValue(uedfFileRecordList.get(ctr).getLockCode2());
 				}
 				
-				if (serialType.equalsIgnoreCase("a")) {
+				if (serialType.equalsIgnoreCase("a") || serialType.equalsIgnoreCase("r2")
+						|| serialType.equalsIgnoreCase("v")) {
 					cell = row.createCell(14);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getSharedSecretCode());
 					
@@ -126,8 +125,12 @@ public class Controller {
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMacID());
 				}
 				
-				if (serialType.equalsIgnoreCase("b") || serialType.toLowerCase().contains("c")) {
-					if (serialType.equalsIgnoreCase("c")) {
+				if (serialType.equalsIgnoreCase("b") || serialType.toLowerCase().contains("c")
+						|| serialType.equalsIgnoreCase("l") || serialType.equalsIgnoreCase("r")
+						|| serialType.equalsIgnoreCase("t") || serialType.equalsIgnoreCase("w")
+						|| serialType.equalsIgnoreCase("w1") || serialType.equalsIgnoreCase("w4")) {
+					
+					if (!serialType.equalsIgnoreCase("w1") || !serialType.equalsIgnoreCase("w4")) {
 						cell = row.createCell(8);
 						cell.setCellValue(uedfFileRecordList.get(ctr).getImsi());
 					}
@@ -140,13 +143,30 @@ public class Controller {
 
 					cell = row.createCell(17);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getPrl());
+					
+					if (serialType.equalsIgnoreCase("r")) {
+						cell = row.createCell(36);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getTransceiverSKU());
+					}
+					
 				}
 				
-				if (serialType.toLowerCase().contains("c")) {
+				if (serialType.contains("c") || serialType.equalsIgnoreCase("t")
+						|| serialType.contains("u") || serialType.equalsIgnoreCase("w")
+						|| serialType.equalsIgnoreCase("w1") || serialType.equalsIgnoreCase("w3")
+						|| serialType.equalsIgnoreCase("w4")) {
 					
-					if (serialType.equalsIgnoreCase("c") || serialType.equalsIgnoreCase("c1")) {
-						cell = row.createCell(26);
-						cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
+					if (serialType.equalsIgnoreCase("c") || serialType.equalsIgnoreCase("c1")
+							|| serialType.equalsIgnoreCase("t") || serialType.equalsIgnoreCase("u")
+							|| serialType.equalsIgnoreCase("u1") || serialType.equalsIgnoreCase("u2")
+							|| serialType.equalsIgnoreCase("u3") || serialType.equalsIgnoreCase("w")
+							|| serialType.equalsIgnoreCase("w1") || serialType.equalsIgnoreCase("w3")
+							|| serialType.equalsIgnoreCase("w4")) {
+						
+						if (!serialType.equalsIgnoreCase("u2")) {
+							cell = row.createCell(26);
+							cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
+						}
 						
 						cell = row.createCell(27);
 						cell.setCellValue(uedfFileRecordList.get(ctr).getPuc1());
@@ -172,10 +192,40 @@ public class Controller {
 						cell = row.createCell(47);
 						cell.setCellValue(uedfFileRecordList.get(ctr).getAccUiccCard());
 						
-						cell = row.createCell(48);
-						cell.setCellValue(uedfFileRecordList.get(ctr).getSfEquipmentID());
+						if (serialType.equalsIgnoreCase("t")) {
+							cell = row.createCell(18);
+							cell.setCellValue(uedfFileRecordList.get(ctr).getMacID());
+							
+							cell = row.createCell(45);
+							cell.setCellValue(uedfFileRecordList.get(ctr).getUiccCardIndicator());
+
+						} 
 						
-					} else {
+						if (serialType.equalsIgnoreCase("c") || serialType.equalsIgnoreCase("c1")
+								|| serialType.equalsIgnoreCase("w") || serialType.equalsIgnoreCase("w1")
+								|| serialType.equalsIgnoreCase("w4")){
+							cell = row.createCell(48);
+							cell.setCellValue(uedfFileRecordList.get(ctr).getSfEquipmentID());
+							
+						}
+						
+						if (serialType.equalsIgnoreCase("u2") || serialType.equalsIgnoreCase("w")) {
+							cell = row.createCell(32);
+							cell.setCellValue(uedfFileRecordList.get(ctr).getManuEncryptKeyIndex());
+						}
+						
+						if (serialType.equalsIgnoreCase("u3") || serialType.equalsIgnoreCase("w1")
+								|| serialType.equalsIgnoreCase("w3") || serialType.equalsIgnoreCase("w4")) {
+							cell = row.createCell(32);
+							cell.setCellValue(uedfFileRecordList.get(ctr).getProfileType());
+						}
+						
+					} 
+					
+					
+					if (serialType.equalsIgnoreCase("c2") || serialType.equalsIgnoreCase("c4")
+							|| serialType.equalsIgnoreCase("c5") || serialType.equalsIgnoreCase("u3")
+							|| serialType.equalsIgnoreCase("w3") || serialType.equalsIgnoreCase("w4")) {
 						cell = row.createCell(50);
 						cell.setCellValue(uedfFileRecordList.get(ctr).getEfImpu());
 						
@@ -183,16 +233,35 @@ public class Controller {
 						cell.setCellValue(uedfFileRecordList.get(ctr).getEfImpi());
 						
 					}
-					
+				
+				}
+				
+				if (serialType.equalsIgnoreCase("e")) {
+					cell = row.createCell(17);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getPrl());
+				}
+				
+				if (serialType.equalsIgnoreCase("g")) {
+					cell = row.createCell(18);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getMacID());
+				}
+				
+				if (serialType.equalsIgnoreCase("l") || serialType.equalsIgnoreCase("r2")
+						|| serialType.equalsIgnoreCase("t")) {
+					cell = row.createCell(22);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getCardSKU());
 					
 				}
 				
-				/* P P3 P5 K3 A B 
+				
+				
+				
+				/* P P3 P5 K3 A B E G H H3 H5 K4 L L1 L3 L4 M3 R R2 T V Y
 				cell = row.createCell(14);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getSoftwareVersionNo());
 				*/
 				
-				/* P B
+				/* P B E H H5 K4 L L1 L4 R T
 				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p")) {
 					cell = row.createCell(15);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMeidHex());
@@ -204,24 +273,44 @@ public class Controller {
 				cell = row.createCell(20);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getEdfSerial());
 				
-				if (serialType.equalsIgnoreCase("p3") || serialType.equalsIgnoreCase("k3")) {
+				if (serialType.equalsIgnoreCase("p3") || serialType.equalsIgnoreCase("k3") 
+						|| serialType.equalsIgnoreCase("h3") || serialType.equalsIgnoreCase("h5")
+						|| serialType.equalsIgnoreCase("k4") || serialType.equalsIgnoreCase("l3")
+						|| serialType.equalsIgnoreCase("l4") || serialType.equalsIgnoreCase("m3")) {
 					cell = row.createCell(25);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec());
+					
+					if (serialType.equalsIgnoreCase("h5")) {
+						cell = row.createCell(53);
+						cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec2());
+					}
 				}
 				
-				if (serialType.equalsIgnoreCase("k3")) {
+				if (serialType.equalsIgnoreCase("k3") || serialType.equalsIgnoreCase("l3")) {
 					cell = row.createCell(52);
-					cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec());
+					cell.setCellValue(uedfFileRecordList.get(ctr).getCsnOrEid());
 				}
 				
-				/* P3, P5, P
+				if (serialType.equalsIgnoreCase("y")) {
+					cell = row.createCell(9);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getAuthKey());
+					
+					cell = row.createCell(10);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getAuthKeyChecksum());
+					
+					cell = row.createCell(36);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getTransceiverSKU());
+
+				}
+				
+				/* P3, P5, P, M3 R R2 Y
 				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p") || uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p3")) {
 				
 					cell = row.createCell(26);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
 				}*/
 				
-				//52
+				
 			}
 			
 			xlsxFile.close();
