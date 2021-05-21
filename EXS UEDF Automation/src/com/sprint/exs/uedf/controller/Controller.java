@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -46,6 +48,18 @@ public class Controller {
 			} else if (key.split("-")[1].equalsIgnoreCase("c")) {
 				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_C()));
 				
+			} else if (key.split("-")[1].equalsIgnoreCase("c1")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_C1()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("c2")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_C2()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("c4")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_C4()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("c5")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_C5()));
+				
 			} else if (key.split("-")[1].equalsIgnoreCase("p")) {
 				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_P()));
 				
@@ -58,10 +72,80 @@ public class Controller {
 			} else if (key.split("-")[1].equalsIgnoreCase("k3")) {
 				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_K3()));
 					
-			} else {
-				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_OTHER()));
-					
+			} else if (key.split("-")[1].equalsIgnoreCase("e")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_E()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("g")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_G()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("h")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_H()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("h3")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_H3()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("h5")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_H5()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("k4")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_K4()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("l")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_L()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("l1")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_L1()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("l3")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_L3()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("l4")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_L4()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("m3")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_M3()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("p4")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_P4()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("r")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_R2()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("t")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_T()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("u")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_U()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("u1")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_U1()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("u2")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_U2()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("u3")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_U3()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("v")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_V()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("w")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_W()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("w1")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_W1()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("w3")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_W3()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("w4")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_W4()));
+				
+			} else if (key.split("-")[1].equalsIgnoreCase("y")) {
+				uedfFileRecord.put(key.split("-")[0], model.executeEdfSerialQueries(key, queries.getQUERY_Y()));
+				
 			}
+			
 			
 		}
 
@@ -71,9 +155,9 @@ public class Controller {
 	public void createMultipleExcel(Map<String, List<UedfFile>> uedfFileRecord) {
 		
 		for (String key : uedfFileRecord.keySet()) {
-			System.out.println(key);
-			System.out.println(uedfFileRecord.get(key).size());
-			//createExcel(uedfFileRecord.get(key));
+			//System.out.println(key);
+			//System.out.println(uedfFileRecord.get(key).size());
+			createExcel(uedfFileRecord.get(key));
 		}
 		
 	}
@@ -108,7 +192,16 @@ public class Controller {
 				cell.setCellValue(uedfFileRecordList.get(ctr).getEquipmentType());
 				
 				// P P3 P5 K3 B E H H5 K4 L L1 L3 L4 M3 R T Y
-				if (!serialType.equalsIgnoreCase("a")) {
+				
+				if (serialType.equalsIgnoreCase("p") || serialType.equalsIgnoreCase("p3")
+						|| serialType.equalsIgnoreCase("p5") || serialType.equalsIgnoreCase("k3")
+						|| serialType.equalsIgnoreCase("b") || serialType.equalsIgnoreCase("e")
+						|| serialType.equalsIgnoreCase("h") || serialType.equalsIgnoreCase("h5")
+						|| serialType.equalsIgnoreCase("k4") || serialType.equalsIgnoreCase("l")
+						|| serialType.equalsIgnoreCase("l1") || serialType.equalsIgnoreCase("l3")
+						|| serialType.equalsIgnoreCase("l4") || serialType.equalsIgnoreCase("m3")
+						|| serialType.equalsIgnoreCase("r") || serialType.equalsIgnoreCase("t")
+						|| serialType.equalsIgnoreCase("y")) {
 					cell = row.createCell(11);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getLockCode1());
 				
@@ -256,19 +349,38 @@ public class Controller {
 				
 				
 				
-				/* P P3 P5 K3 A B E G H H3 H5 K4 L L1 L3 L4 M3 R R2 T V Y
-				cell = row.createCell(14);
-				cell.setCellValue(uedfFileRecordList.get(ctr).getSoftwareVersionNo());
-				*/
+				// P P3 P5 K3 A B E G H H3 H5 K4 L L1 L3 L4 M3 R R2 T V Y
 				
-				/* P B E H H5 K4 L L1 L4 R T
-				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p")) {
+				if (serialType.equalsIgnoreCase("p") || serialType.equalsIgnoreCase("p3")
+						|| serialType.equalsIgnoreCase("p5") || serialType.equalsIgnoreCase("k3")
+						|| serialType.equalsIgnoreCase("a") || serialType.equalsIgnoreCase("b")
+						|| serialType.equalsIgnoreCase("e") || serialType.equalsIgnoreCase("g")
+						|| serialType.equalsIgnoreCase("h") || serialType.equalsIgnoreCase("h3")
+						|| serialType.equalsIgnoreCase("h5") || serialType.equalsIgnoreCase("k4")
+						|| serialType.equalsIgnoreCase("l") || serialType.equalsIgnoreCase("l1")
+						|| serialType.equalsIgnoreCase("l3") || serialType.equalsIgnoreCase("l4")
+						|| serialType.equalsIgnoreCase("m3") || serialType.equalsIgnoreCase("r")
+						|| serialType.equalsIgnoreCase("r2") || serialType.equalsIgnoreCase("t")
+						|| serialType.equalsIgnoreCase("v") || serialType.equalsIgnoreCase("y")) {
+					
+					cell = row.createCell(14);
+					cell.setCellValue(uedfFileRecordList.get(ctr).getSoftwareVersionNo());
+					
+				}
+				
+				// P B E H H5 K4 L L1 L4 R T
+				if (serialType.equalsIgnoreCase("p") || serialType.equalsIgnoreCase("b")
+						|| serialType.equalsIgnoreCase("e") || serialType.equalsIgnoreCase("h")
+						|| serialType.equalsIgnoreCase("h5") || serialType.equalsIgnoreCase("k4")
+						|| serialType.equalsIgnoreCase("l") || serialType.equalsIgnoreCase("l1")
+						|| serialType.equalsIgnoreCase("l4") || serialType.equalsIgnoreCase("r")
+						|| serialType.equalsIgnoreCase("t")) {
 					cell = row.createCell(15);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMeidHex());
 					
 					cell = row.createCell(16);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMeidDec());
-				}*/
+				}
 				
 				cell = row.createCell(20);
 				cell.setCellValue(uedfFileRecordList.get(ctr).getEdfSerial());
@@ -303,12 +415,15 @@ public class Controller {
 
 				}
 				
-				/* P3, P5, P, M3 R R2 Y
-				if (uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p") || uedfFileRecordList.get(ctr).getEdfSerial().equalsIgnoreCase("p3")) {
+				// P3, P5, P, M3 R R2 Y
+				if (serialType.equalsIgnoreCase("p") || serialType.equalsIgnoreCase("p3")
+						|| serialType.equalsIgnoreCase("p5") || serialType.equalsIgnoreCase("m3")
+						|| serialType.equalsIgnoreCase("r") || serialType.equalsIgnoreCase("r2")
+						|| serialType.equalsIgnoreCase("y")) {
 				
 					cell = row.createCell(26);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getIccid());
-				}*/
+				}
 				
 				
 			}
@@ -321,8 +436,8 @@ public class Controller {
 			fileOutputStream.close();
 			
 		} catch (IOException e) {
-			
-			System.out.println("File issues: " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "File issues: " + e.getMessage());
+			//System.out.println("File issues: " + e.getMessage());
 			
 		}
 		

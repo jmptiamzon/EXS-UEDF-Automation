@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 public class Model {
 	
 	public Map<String, List<UedfErrors>> executeErrorQuery(String query) {
@@ -19,7 +21,7 @@ public class Model {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection conn = 
-					DriverManager.getConnection("", "", "");
+					DriverManager.getConnection("jdbc:oracle:thin:@poc0368.corp.sprint.com:1523/EDFP101.CORP.SPRINT.COM", "edf_query", "edf_query");
 			
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet rs = statement.executeQuery();
@@ -47,10 +49,12 @@ public class Model {
 			conn.close();
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("Driver error: " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Driver error: " + e.getMessage());
+			//System.out.println("Driver error: " + e.getMessage());
 			
 		} catch (SQLException e1) {
-			System.out.println("SQL error: " + e1.getMessage());
+			JOptionPane.showMessageDialog(null, "SQL error: " + e1.getMessage());
+			//System.out.println("SQL error: " + e1.getMessage());
 			
 		}
 		
@@ -63,12 +67,13 @@ public class Model {
 	public List<UedfFile> executeEdfSerialQueries(String filename, String query) {
 		UedfFile tempUedfFile;
 		List<UedfFile> uedfFile = new ArrayList<>();
+		String serialType = filename.split("-")[1];
 		
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");		
 			Connection conn = 
-					DriverManager.getConnection("", "", "");
+					DriverManager.getConnection("jdbc:oracle:thin:@poc0368.corp.sprint.com:1523/EDFP101.CORP.SPRINT.COM", "edf_query", "edf_query");
 			
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, filename.split("-")[0]);
@@ -85,16 +90,44 @@ public class Model {
 				tempUedfFile.setModelNumber(rs.getString(5) == null ? "(null)" : rs.getString(5));
 				tempUedfFile.setModelName(rs.getString(6) == null ? "(null)" : rs.getString(6));
 				tempUedfFile.setEquipmentType(rs.getString(7) == null ? "(null)" : rs.getString(7));
-				/* if P P3 P5 K3 A B E G H H3 H5 K4 L L1 L3 L4 M3 P4 R R2 T V Y
-				tempUedfFile.setSoftwareVersionNo(rs.getString(8) == null ? "(null)" : rs.getString(8)); */
+				// if P P3 P5 K3 A B E G H H3 H5 K4 L L1 L3 L4 M3 P4 R R2 T V Y
 				
-				/* P, P3, P5, K3 E H H5 K4 L L1 L3 L4 B M3 P4 R T V Y
-				if (!filename.split("-")[1].equalsIgnoreCase("a")) {
+				if (serialType.equalsIgnoreCase("p") || serialType.equalsIgnoreCase("p3")
+						|| serialType.equalsIgnoreCase("p5") || serialType.equalsIgnoreCase("k3")
+						|| serialType.equalsIgnoreCase("a") || serialType.equalsIgnoreCase("b")
+						|| serialType.equalsIgnoreCase("e") || serialType.equalsIgnoreCase("g")
+						|| serialType.equalsIgnoreCase("h") || serialType.equalsIgnoreCase("h3")
+						|| serialType.equalsIgnoreCase("h5") || serialType.equalsIgnoreCase("k4")
+						|| serialType.equalsIgnoreCase("l") || serialType.equalsIgnoreCase("l1")
+						|| serialType.equalsIgnoreCase("l3") || serialType.equalsIgnoreCase("l4")
+						|| serialType.equalsIgnoreCase("m3") || serialType.equalsIgnoreCase("r")
+						|| serialType.equalsIgnoreCase("r2") || serialType.equalsIgnoreCase("t")
+						|| serialType.equalsIgnoreCase("v") || serialType.equalsIgnoreCase("y")
+						|| serialType.equalsIgnoreCase("p4")) {
+					
+					tempUedfFile.setSoftwareVersionNo(rs.getString(8) == null ? "(null)" : rs.getString(8)); 
+					
+				}
+				
+				
+				// P, P3, P5, K3 E H H5 K4 L L1 L3 L4 B M3 P4 R T V Y
+				if (serialType.equalsIgnoreCase("p") || serialType.equalsIgnoreCase("p3")
+						|| serialType.equalsIgnoreCase("p5") || serialType.equalsIgnoreCase("k3")
+						|| serialType.equalsIgnoreCase("e") || serialType.equalsIgnoreCase("h")
+						|| serialType.equalsIgnoreCase("h5") || serialType.equalsIgnoreCase("k4")
+						|| serialType.equalsIgnoreCase("l") || serialType.equalsIgnoreCase("l1")
+						|| serialType.equalsIgnoreCase("l3") || serialType.equalsIgnoreCase("l4")
+						|| serialType.equalsIgnoreCase("b") || serialType.equalsIgnoreCase("m3")
+						|| serialType.equalsIgnoreCase("p4") || serialType.equalsIgnoreCase("l4")
+						|| serialType.equalsIgnoreCase("m3") || serialType.equalsIgnoreCase("r")
+						|| serialType.equalsIgnoreCase("t") || serialType.equalsIgnoreCase("v")
+						|| serialType.equalsIgnoreCase("y")) {
+					
 					tempUedfFile.setLockCode1(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setLockCode2(rs.getString(10) == null ? "(null)" : rs.getString(10));
-				} */
+				} 
 				
-				if (filename.split("-")[1].equalsIgnoreCase("a")) {
+				if (serialType.equalsIgnoreCase("a")) {
 					tempUedfFile.setMacID(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setSharedSecretCode(rs.getString(10) == null ? "(null)" : rs.getString(10));
 					tempUedfFile.setErrorDescription(rs.getString(11) == null ? "(null)" : rs.getString(11));
@@ -102,8 +135,8 @@ public class Model {
 					
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("b") || filename.split("-")[1].equalsIgnoreCase("l")
-						|| filename.split("-")[1].equalsIgnoreCase("r") || filename.split("-")[1].equalsIgnoreCase("t")) {
+				if (serialType.equalsIgnoreCase("b") || serialType.equalsIgnoreCase("l")
+						|| serialType.equalsIgnoreCase("r") || serialType.equalsIgnoreCase("t")) {
 					tempUedfFile.setImsi(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setAuthKey(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					tempUedfFile.setAuthKeyChecksum(rs.getString(13) == null ? "(null)" : rs.getString(13));
@@ -111,27 +144,27 @@ public class Model {
 					tempUedfFile.setMeidDec(rs.getString(15) == null ? "(null)" : rs.getString(15));
 					tempUedfFile.setPrl(rs.getString(16) == null ? "(null)" : rs.getString(16));
 					
-					if (filename.split("-")[1].equalsIgnoreCase("b")) {
+					if (serialType.equalsIgnoreCase("b")) {
 						tempUedfFile.setErrorDescription(rs.getString(17) == null ? "(null)" : rs.getString(17));
 						tempUedfFile.setComment(rs.getString(18) == null ? "(null)" : rs.getString(18));
 						
 					} 
 					
-					if (filename.split("-")[1].equalsIgnoreCase("l")) {
+					if (serialType.equalsIgnoreCase("l")) {
 						tempUedfFile.setCardSKU(rs.getString(17) == null ? "(null)" : rs.getString(17));
 						tempUedfFile.setErrorDescription(rs.getString(18) == null ? "(null)" : rs.getString(18));
 						tempUedfFile.setComment(rs.getString(19) == null ? "(null)" : rs.getString(19));
 					
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("r")) {
+					if (serialType.equalsIgnoreCase("r")) {
 						tempUedfFile.setIccid(rs.getString(17) == null ? "(null)" : rs.getString(17));
 						tempUedfFile.setTransceiverSKU(rs.getString(18) == null ? "(null)" : rs.getString(18));
 						tempUedfFile.setErrorDescription(rs.getString(19) == null ? "(null)" : rs.getString(19));
 						tempUedfFile.setComment(rs.getString(20) == null ? "(null)" : rs.getString(20));
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("t")) {
+					if (serialType.equalsIgnoreCase("t")) {
 						tempUedfFile.setMacID(rs.getString(17) == null ? "(null)" : rs.getString(17));
 						tempUedfFile.setCardSKU(rs.getString(18) == null ? "(null)" : rs.getString(18));
 						tempUedfFile.setIccid(rs.getString(19) == null ? "(null)" : rs.getString(19));
@@ -151,7 +184,7 @@ public class Model {
 					
 				}
 				
-				if (filename.split("-")[1].contains("c") || filename.split("-")[1].equalsIgnoreCase("w")) {
+				if (serialType.contains("c") || serialType.equalsIgnoreCase("w")) {
 					tempUedfFile.setImsi(rs.getString(8) == null ? "(null)" : rs.getString(8));
 					tempUedfFile.setAuthKey(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setAuthKeyChecksum(rs.getString(10) == null ? "(null)" : rs.getString(10));
@@ -167,25 +200,25 @@ public class Model {
 					tempUedfFile.setAccUiccCard(rs.getString(20) == null ? "(null)" : rs.getString(20));
 					tempUedfFile.setSfEquipmentID(rs.getString(21) == null ? "(null)" : rs.getString(21));
 					
-					if (filename.split("-")[1].equalsIgnoreCase("c")) {
+					if (serialType.equalsIgnoreCase("c")) {
 						tempUedfFile.setErrorDescription(rs.getString(22) == null ? "(null)" : rs.getString(22));
 						tempUedfFile.setComment(rs.getString(23) == null ? "(null)" : rs.getString(23));
 					} 
 					
-					if (!filename.split("-")[1].equalsIgnoreCase("c") && !filename.split("-")[1].equalsIgnoreCase("w"))  {
+					if (!serialType.equalsIgnoreCase("c") && !serialType.equalsIgnoreCase("w"))  {
 						tempUedfFile.setEfImpu(rs.getString(22) == null ? "(null)" : rs.getString(22));
 						tempUedfFile.setEfImpi(rs.getString(23) == null ? "(null)" : rs.getString(23));
 						tempUedfFile.setErrorDescription(rs.getString(24) == null ? "(null)" : rs.getString(24));
 						tempUedfFile.setComment(rs.getString(25) == null ? "(null)" : rs.getString(25));
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("w")) {
+					if (serialType.equalsIgnoreCase("w")) {
 						tempUedfFile.setManuEncryptKeyIndex(rs.getString(22) == null ? "(null)" : rs.getString(25));
 					}
 					
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("e")) {
+				if (serialType.equalsIgnoreCase("e")) {
 					tempUedfFile.setAuthKey(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setAuthKeyChecksum(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					tempUedfFile.setMeidHex(rs.getString(13) == null ? "(null)" : rs.getString(13));
@@ -195,30 +228,30 @@ public class Model {
 					tempUedfFile.setComment(rs.getString(17) == null ? "(null)" : rs.getString(17));
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("g")) {
+				if (serialType.equalsIgnoreCase("g")) {
 					tempUedfFile.setMacID(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setErrorDescription(rs.getString(10) == null ? "(null)" : rs.getString(10));
 					tempUedfFile.setComment(rs.getString(11) == null ? "(null)" : rs.getString(11));
 				}
 				
-				if (filename.split("-")[1].contains("h")) {
+				if (serialType.contains("h")) {
 					if (filename.split("-")[1].equalsIgnoreCase("h") || filename.split("-")[1].equalsIgnoreCase("h5")) {
 						tempUedfFile.setMeidHex(rs.getString(11) == null ? "(null)" : rs.getString(11));
 						tempUedfFile.setMeidDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("h")) {
+					if (serialType.equalsIgnoreCase("h")) {
 						tempUedfFile.setErrorDescription(rs.getString(13) == null ? "(null)" : rs.getString(13));
 						tempUedfFile.setComment(rs.getString(14) == null ? "(null)" : rs.getString(14));
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("h3")) {
+					if (serialType.equalsIgnoreCase("h3")) {
 						tempUedfFile.setImeiDec(rs.getString(9) == null ? "(null)" : rs.getString(9));
 						tempUedfFile.setErrorDescription(rs.getString(10) == null ? "(null)" : rs.getString(10));
 						tempUedfFile.setComment(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("h5")) {
+					if (serialType.equalsIgnoreCase("h5")) {
 						tempUedfFile.setImeiDec(rs.getString(13) == null ? "(null)" : rs.getString(13));
 						tempUedfFile.setImeiDec2(rs.getString(14) == null ? "(null)" : rs.getString(14));
 						tempUedfFile.setErrorDescription(rs.getString(15) == null ? "(null)" : rs.getString(15));
@@ -228,7 +261,7 @@ public class Model {
 
 				}
 
-				if (filename.split("-")[1].equalsIgnoreCase("k3")) {
+				if (serialType.equalsIgnoreCase("k3")) {
 					tempUedfFile.setCsnOrEid(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setImeiDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					tempUedfFile.setErrorDescription(rs.getString(13) == null ? "(null)" : rs.getString(13));
@@ -236,7 +269,7 @@ public class Model {
 					
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("k4")) {
+				if (serialType.equalsIgnoreCase("k4")) {
 					tempUedfFile.setMeidHex(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setMeidDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					tempUedfFile.setImeiDec(rs.getString(13) == null ? "(null)" : rs.getString(13));
@@ -244,26 +277,26 @@ public class Model {
 					tempUedfFile.setComment(rs.getString(15) == null ? "(null)" : rs.getString(15));
 				}	
 				
-				if (filename.split("-")[1].contains("l")) {
-					if (filename.split("-")[1].equalsIgnoreCase("l1") || filename.split("-")[1].equalsIgnoreCase("l4")) {
+				if (serialType.contains("l")) {
+					if (serialType.equalsIgnoreCase("l1") || serialType.equalsIgnoreCase("l4")) {
 						tempUedfFile.setMeidHex(rs.getString(11) == null ? "(null)" : rs.getString(11));
 						tempUedfFile.setMeidDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
 							
 					} 
 
-					if (filename.split("-")[1].equalsIgnoreCase("l3")) {
+					if (serialType.equalsIgnoreCase("l3")) {
 						tempUedfFile.setImeiDec(rs.getString(11) == null ? "(null)" : rs.getString(11));
 						tempUedfFile.setCsnOrEid(rs.getString(12) == null ? "(null)" : rs.getString(12));
 							
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("l1") || filename.split("-")[1].equalsIgnoreCase("l3")) {
+					if (serialType.equalsIgnoreCase("l1") || serialType.equalsIgnoreCase("l3")) {
 						tempUedfFile.setErrorDescription(rs.getString(13) == null ? "(null)" : rs.getString(13));
 						tempUedfFile.setComment(rs.getString(14) == null ? "(null)" : rs.getString(14));
 					
 					}
 						
-					if (filename.split("-")[1].equalsIgnoreCase("l4")) {
+					if (serialType.equalsIgnoreCase("l4")) {
 						tempUedfFile.setImeiDec(rs.getString(13) == null ? "(null)" : rs.getString(13));
 						tempUedfFile.setErrorDescription(rs.getString(14) == null ? "(null)" : rs.getString(14));
 						tempUedfFile.setComment(rs.getString(15) == null ? "(null)" : rs.getString(15));
@@ -271,7 +304,7 @@ public class Model {
 
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("m3")) {
+				if (serialType.equalsIgnoreCase("m3")) {
 					tempUedfFile.setImeiDec(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setIccid(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					tempUedfFile.setErrorDescription(rs.getString(13) == null ? "(null)" : rs.getString(13));
@@ -279,7 +312,7 @@ public class Model {
 					
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("r2")) {
+				if (serialType.equalsIgnoreCase("r2")) {
 					tempUedfFile.setMacID(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setCardSKU(rs.getString(10) == null ? "(null)" : rs.getString(10));
 					tempUedfFile.setIccid(rs.getString(11) == null ? "(null)" : rs.getString(11));
@@ -288,9 +321,9 @@ public class Model {
 					tempUedfFile.setComment(rs.getString(14) == null ? "(null)" : rs.getString(14));
 				}
 				
-				if (filename.split("-")[1].contains("u")) {
-					if (filename.split("-")[1].equalsIgnoreCase("u") || filename.split("-")[1].equalsIgnoreCase("u1")
-							|| filename.split("-")[1].equalsIgnoreCase("u3")) {
+				if (serialType.contains("u")) {
+					if (serialType.equalsIgnoreCase("u") || serialType.equalsIgnoreCase("u1")
+							|| serialType.equalsIgnoreCase("u3")) {
 						tempUedfFile.setIccid(rs.getString(8) == null ? "(null)" : rs.getString(8));
 						tempUedfFile.setPuc1(rs.getString(9) == null ? "(null)" : rs.getString(9));
 						tempUedfFile.setPuc2(rs.getString(10) == null ? "(null)" : rs.getString(10));
@@ -301,7 +334,7 @@ public class Model {
 						tempUedfFile.setImsiUiccCard(rs.getString(15) == null ? "(null)" : rs.getString(15));
 						tempUedfFile.setAccUiccCard(rs.getString(16) == null ? "(null)" : rs.getString(16));
 						
-						if (filename.split("-")[1].equalsIgnoreCase("u3")) {
+						if (serialType.equalsIgnoreCase("u3")) {
 							tempUedfFile.setProfileType(rs.getString(17) == null ? "(null)" : rs.getString(17));
 							tempUedfFile.setEfImpu(rs.getString(18) == null ? "(null)" : rs.getString(18));
 							tempUedfFile.setEfImpi(rs.getString(19) == null ? "(null)" : rs.getString(19));
@@ -316,7 +349,7 @@ public class Model {
 
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("u2")) {
+					if (serialType.equalsIgnoreCase("u2")) {
 						tempUedfFile.setPuc1(rs.getString(8) == null ? "(null)" : rs.getString(8));
 						tempUedfFile.setPuc2(rs.getString(9) == null ? "(null)" : rs.getString(9));
 						tempUedfFile.setPin1(rs.getString(10) == null ? "(null)" : rs.getString(10));
@@ -332,14 +365,14 @@ public class Model {
 					}
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("v")) {
+				if (serialType.equalsIgnoreCase("v")) {
 					tempUedfFile.setMacID(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setSharedSecretCode(rs.getString(10) == null ? "(null)" : rs.getString(10));
 					tempUedfFile.setErrorDescription(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setComment(rs.getString(12) == null ? "(null)" : rs.getString(12));
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("w1") || filename.split("-")[1].equalsIgnoreCase("w4")) {
+				if (serialType.equalsIgnoreCase("w1") || serialType.equalsIgnoreCase("w4")) {
 					tempUedfFile.setAuthKey(rs.getString(8) == null ? "(null)" : rs.getString(8));
 					tempUedfFile.setAuthKeyChecksum(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setPrl(rs.getString(10) == null ? "(null)" : rs.getString(10));
@@ -355,12 +388,12 @@ public class Model {
 					tempUedfFile.setSfEquipmentID(rs.getString(20) == null ? "(null)" : rs.getString(20));
 					tempUedfFile.setProfileType(rs.getString(21) == null ? "(null)" : rs.getString(21));
 					
-					if (filename.split("-")[1].equalsIgnoreCase("w1")) {
+					if (serialType.equalsIgnoreCase("w1")) {
 						tempUedfFile.setErrorDescription(rs.getString(22) == null ? "(null)" : rs.getString(22));
 						tempUedfFile.setComment(rs.getString(23) == null ? "(null)" : rs.getString(23));
 					}
 					
-					if (filename.split("-")[1].equalsIgnoreCase("w4")) {
+					if (serialType.equalsIgnoreCase("w4")) {
 						tempUedfFile.setEfImpu(rs.getString(22) == null ? "(null)" : rs.getString(22));
 						tempUedfFile.setEfImpi(rs.getString(23) == null ? "(null)" : rs.getString(23));
 						tempUedfFile.setErrorDescription(rs.getString(24) == null ? "(null)" : rs.getString(24));
@@ -369,7 +402,7 @@ public class Model {
 					}
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("w3")) {
+				if (serialType.equalsIgnoreCase("w3")) {
 					tempUedfFile.setIccid(rs.getString(8) == null ? "(null)" : rs.getString(8));
 					tempUedfFile.setPuc1(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setPuc2(rs.getString(10) == null ? "(null)" : rs.getString(10));
@@ -387,7 +420,7 @@ public class Model {
 					
 				}
 				
-				if (filename.split("-")[1].equalsIgnoreCase("Y")) {
+				if (serialType.equalsIgnoreCase("Y")) {
 					tempUedfFile.setAuthKey(rs.getString(8) == null ? "(null)" : rs.getString(8));
 					tempUedfFile.setAuthKeyChecksum(rs.getString(9) == null ? "(null)" : rs.getString(9));
 					tempUedfFile.setIccid(rs.getString(10) == null ? "(null)" : rs.getString(10));
@@ -399,18 +432,19 @@ public class Model {
 				
 
 				
-				/*
-				else { // P3, P5, P  P4
+				// P3, P5, P  P4
+				if (serialType.equalsIgnoreCase("p3") || serialType.equalsIgnoreCase("p5")
+						|| serialType.equalsIgnoreCase("p") || serialType.equalsIgnoreCase("p4")) {
 					tempUedfFile.setMeidHex(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setMeidDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					
-					if (filename.split("-")[1].equalsIgnoreCase("p3")) {
+					if (serialType.equalsIgnoreCase("p3")) {
 						tempUedfFile.setImeiDec(rs.getString(13) == null ? "(null)" : rs.getString(13));
 						tempUedfFile.setIccid(rs.getString(14) == null ? "(null)" : rs.getString(14));
 						tempUedfFile.setErrorDescription(rs.getString(15) == null ? "(null)" : rs.getString(15));
 						tempUedfFile.setComment(rs.getString(16) == null ? "(null)" : rs.getString(16));
 						
-					} else if (filename.split("-")[1].equalsIgnoreCase("h")) {
+					} else if (serialType.equalsIgnoreCase("h")) {
 						tempUedfFile.setErrorDescription(rs.getString(13) == null ? "(null)" : rs.getString(13));
 						tempUedfFile.setComment(rs.getString(14) == null ? "(null)" : rs.getString(14));
 						
@@ -419,7 +453,7 @@ public class Model {
 						tempUedfFile.setErrorDescription(rs.getString(14) == null ? "(null)" : rs.getString(14));
 						tempUedfFile.setComment(rs.getString(15) == null ? "(null)" : rs.getString(15));
 					}
-				}*/
+				}
 
 				uedfFile.add(tempUedfFile);
 			}
@@ -427,10 +461,12 @@ public class Model {
 			conn.close();
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("Driver error: " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Driver error: " + e.getMessage());
+			//System.out.println("Driver error: " + e.getMessage());
 			
 		} catch (SQLException e1) {
-			System.out.println("SQL error: " + e1.getMessage());
+			JOptionPane.showMessageDialog(null, "SQL error: " + e1.getMessage());
+			//System.out.println("SQL error: " + e1.getMessage());
 			
 		}
 

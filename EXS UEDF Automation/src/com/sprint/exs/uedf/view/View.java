@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -109,8 +110,8 @@ public class View extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setLayout(new BorderLayout());
-		add(leftPane, BorderLayout.WEST);
-		add(rightPane, BorderLayout.CENTER);
+		add(leftPane, BorderLayout.NORTH);
+		//add(rightPane, BorderLayout.CENTER);
 		add(bottomPane, BorderLayout.SOUTH);
 		
 		titledBorder = new TitledBorder("UEDF Errors");
@@ -204,12 +205,14 @@ public class View extends JFrame implements ActionListener {
 			setErrorTableData(uedfErrors);
 			uedfFileRecord = controller.getUedfFileRecord(uedfErrors);
 			
-			uedfModel.setRowCount(0);
+			/*uedfModel.setRowCount(0);
 			for (String key : uedfFileRecord.keySet()) {
 				setUedfLogsTableData(uedfFileRecord.get(key));
-			}
+			}*/
 			
 			controller.createMultipleExcel(uedfFileRecord);
+			
+			JOptionPane.showMessageDialog(null, "File generation done! Please check Documents/exs_uedf folder.");
 			
 		}
 		

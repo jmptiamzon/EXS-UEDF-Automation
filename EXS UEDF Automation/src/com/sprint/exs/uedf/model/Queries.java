@@ -199,7 +199,7 @@ public class Queries {
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL ";
 	//REMOVED IMSI C1 - C4 because not needed
-	private final String C1 =
+	private final String QUERY_C1 =
 			"SELECT " + 
 			"HDR.FILE_NAME " + 
 			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
@@ -1995,42 +1995,7 @@ public class Queries {
 			"GROUP BY FILE_NAME " + 
 			") " + 
 			"ORDER BY HDR.CREATION_DATE DESC, FILE_NAME,IMEI_DECIMAL ";
-	
-	private final String QUERY_OTHER =
-			"SELECT " + 
-			"HDR.FILE_NAME " + 
-			", COUNT(DISTINCT DET.SKU) OVER (PARTITIOn BY HDR.FILE_NAME, DET.SKU) CNT_SKU " + 
-			", CASE WHEN DET.EDF_SERIAL_TYPE = SKUM.EDF_PRODUCT_TYPE " + 
-			"THEN SKUM.EDF_PRODUCT_TYPE " + 
-			"ELSE 'Should Be '||SKUM.EDF_PRODUCT_TYPE||' not '||DET.EDF_SERIAL_TYPE " + 
-			"END EDF_SERIAL " + 
-			", DET.* " + 
-			", CASE WHEN DET.ERROR_DESCRIPTION like '%IMEI and IMEI2 are same%' " + 
-			"THEN 'Need to Send Email with the IMEI_DEC to supply the IMEI2_DECIMAL to NMS, If NMS cannot supply send to Magenta Team' " + 
-			"WHEN DET.ERROR_DESCRIPTION like '%IMEI2_DECIMAL is a required column it cannot be NULL%' " + 
-			"OR DET.ERROR_DESCRIPTION like '%CSN_OR_EID is a required column it cannot be NULL%' " + 
-			"THEN 'Create SR Ticket in Pier 2.0 requesting for IMEI2_DECIMAL or CSN_OR_EID of the following IMEI_DEC' " + 
-			"ELSE 'You can Recreate UEDF as NW normally' " + 
-			"END AS COMMENT_COL " + 
-			"FROM EDF.EDF_HEADER_STG_INT HDR " + 
-			"JOIN EDF.EDF_DETAILS_STG_INT DET " + 
-			"ON HDR.UNIQUE_SEQUENCE_NUMBER = DET.UNIQUE_SEQUENCE_NUMBER " + 
-			"LEFT JOIN EDF.SKU_MASTER SKUM " + 
-			"ON SKUM.SKU_NUMBER = DET.SKU " + 
-			"WHERE 1 =1 " + 
-			"and DET.ERROR_DESCRIPTION LIKE '%meid or esn or imeiDec doesnot exist in tables%' " + 
-			"AND DET.ERROR_DESCRIPTION is not null " + 
-			//"--AND trunc(HDR.creation_date) >= trunc(sysdate)-1 \r\n" + 
-			"and DET.status = 'ERROR' " + 
-			"AND HDR.FILE_NAME = ? " + 
-			"AND SKUM.EDF_PRODUCT_TYPE not  in ('K3', 'P', 'P5', 'P3') " + 
-			"AND NOT EXISTS (SELECT 1 " + 
-			"FROM EDF.EDF_INBOUND_HISTORY HIST " + 
-			"WHERE 1=1 " + 
-			"AND HIST.FILENAME = HDR.FILE_NAME " + 
-			"AND STATUS = 'PROCESSED' " + 
-			") " + 
-			"ORDER BY HDR.CREATION_DATE DESC,FILE_NAME";
+
 
 	public String getQUERY_ERRORS() {
 		return QUERY_ERRORS;
@@ -2048,8 +2013,8 @@ public class Queries {
 		return QUERY_C;
 	}
 
-	public String getC1() {
-		return C1;
+	public String getQUERY_C1() {
+		return QUERY_C1;
 	}
 
 	public String getQUERY_C2() {
@@ -2078,10 +2043,6 @@ public class Queries {
 
 	public String getQUERY_P3() {
 		return QUERY_P3;
-	}
-
-	public String getQUERY_OTHER() {
-		return QUERY_OTHER;
 	}
 
 	public String getQUERY_E() {
