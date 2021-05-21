@@ -21,7 +21,7 @@ public class Model {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection conn = 
-					DriverManager.getConnection("jdbc:oracle:thin:@poc0368.corp.sprint.com:1523/EDFP101.CORP.SPRINT.COM", "edf_query", "edf_query");
+					DriverManager.getConnection("", "", "");
 			
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet rs = statement.executeQuery();
@@ -73,7 +73,7 @@ public class Model {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");		
 			Connection conn = 
-					DriverManager.getConnection("jdbc:oracle:thin:@poc0368.corp.sprint.com:1523/EDFP101.CORP.SPRINT.COM", "edf_query", "edf_query");
+					DriverManager.getConnection("", "", "");
 			
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, filename.split("-")[0]);
