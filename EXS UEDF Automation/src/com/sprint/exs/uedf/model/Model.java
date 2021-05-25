@@ -438,11 +438,20 @@ public class Model {
 					tempUedfFile.setMeidHex(rs.getString(11) == null ? "(null)" : rs.getString(11));
 					tempUedfFile.setMeidDec(rs.getString(12) == null ? "(null)" : rs.getString(12));
 					
-					if (serialType.equalsIgnoreCase("p3")) {
+					if (serialType.equalsIgnoreCase("p3") || serialType.equalsIgnoreCase("p5")) {
 						tempUedfFile.setImeiDec(rs.getString(13) == null ? "(null)" : rs.getString(13));
 						tempUedfFile.setIccid(rs.getString(14) == null ? "(null)" : rs.getString(14));
-						tempUedfFile.setErrorDescription(rs.getString(15) == null ? "(null)" : rs.getString(15));
-						tempUedfFile.setComment(rs.getString(16) == null ? "(null)" : rs.getString(16));
+						
+						if (serialType.equalsIgnoreCase("p3")) {
+							tempUedfFile.setErrorDescription(rs.getString(15) == null ? "(null)" : rs.getString(15));
+							tempUedfFile.setComment(rs.getString(16) == null ? "(null)" : rs.getString(16));
+						}
+						
+						if (serialType.equalsIgnoreCase("p5")) {
+							tempUedfFile.setImeiDec2(rs.getString(15) == null ? "(null)" : rs.getString(15));
+							tempUedfFile.setErrorDescription(rs.getString(16) == null ? "(null)" : rs.getString(16));
+							tempUedfFile.setComment(rs.getString(17) == null ? "(null)" : rs.getString(17));
+						}
 						
 					} else if (serialType.equalsIgnoreCase("h")) {
 						tempUedfFile.setErrorDescription(rs.getString(13) == null ? "(null)" : rs.getString(13));

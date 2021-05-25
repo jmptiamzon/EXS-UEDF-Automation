@@ -374,7 +374,7 @@ public class Controller {
 						|| serialType.equalsIgnoreCase("h5") || serialType.equalsIgnoreCase("k4")
 						|| serialType.equalsIgnoreCase("l") || serialType.equalsIgnoreCase("l1")
 						|| serialType.equalsIgnoreCase("l4") || serialType.equalsIgnoreCase("r")
-						|| serialType.equalsIgnoreCase("t")) {
+						|| serialType.equalsIgnoreCase("t") || serialType.equalsIgnoreCase("p5")) {
 					cell = row.createCell(15);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getMeidHex());
 					
@@ -388,11 +388,12 @@ public class Controller {
 				if (serialType.equalsIgnoreCase("p3") || serialType.equalsIgnoreCase("k3") 
 						|| serialType.equalsIgnoreCase("h3") || serialType.equalsIgnoreCase("h5")
 						|| serialType.equalsIgnoreCase("k4") || serialType.equalsIgnoreCase("l3")
-						|| serialType.equalsIgnoreCase("l4") || serialType.equalsIgnoreCase("m3")) {
+						|| serialType.equalsIgnoreCase("l4") || serialType.equalsIgnoreCase("m3")
+						|| serialType.equalsIgnoreCase("p5")) {
 					cell = row.createCell(25);
 					cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec());
 					
-					if (serialType.equalsIgnoreCase("h5")) {
+					if (serialType.equalsIgnoreCase("h5") || serialType.equalsIgnoreCase("p5")) {
 						cell = row.createCell(53);
 						cell.setCellValue(uedfFileRecordList.get(ctr).getImeiDec2());
 					}
